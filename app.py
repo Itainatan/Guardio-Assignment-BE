@@ -23,8 +23,15 @@ def hello():
         return "Invalid page or pageSize", 400
 
     data = db.get()
-    items = data[start_index:end_index]
-    return jsonify(items)
+    total_length = len(data)
+    paginated_data = data[start_index:end_index]
+
+    response = {
+        'list': paginated_data,
+        'totalLength': total_length
+    }
+    
+    return jsonify(response)
 
 
 if __name__=='__main__':
